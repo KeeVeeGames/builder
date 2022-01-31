@@ -44,11 +44,11 @@ Builder = Object.assign(Builder, {
         Builder.Runtime = Builder.RuntimeSettings.location + Builder.RuntimeSettings.selection;
         if (Builder.Platform == "win") {
             let User = JSON.parse(Electron_FS.readFileSync(Electron_App.getPath("appData") + "/GameMakerStudio2/um.json"));
-            Userpath = `${Electron_App.getPath("appData")}/GameMakerStudio2/${User.username.slice(0, User.username.indexOf("@")) + "_" + User.userID}`;
+            Userpath = `${Electron_App.getPath("appData")}/GameMakerStudio2/${User.login.slice(0, User.login.indexOf("@")) + "_" + User.userID}`;
             Temporary = (JSON.parse(Electron_FS.readFileSync(`${Userpath}/local_settings.json`))["machine.General Settings.Paths.IDE.TempFolder"] || `${process.env.LOCALAPPDATA}/GameMakerStudio2`) + "/GMS2TEMP";
         } else {
             let User = JSON.parse(Electron_FS.readFileSync("/Users/" + process.env.LOGNAME + "/.config/GameMakerStudio2/um.json"));
-            Userpath = `/Users/${process.env.LOGNAME}/.config/GameMakerStudio2/${User.username.slice(0, User.username.indexOf("@")) + "_" + User.userID}`;
+            Userpath = `/Users/${process.env.LOGNAME}/.config/GameMakerStudio2/${User.login.slice(0, User.login.indexOf("@")) + "_" + User.userID}`;
             Temporary = (JSON.parse(Electron_FS.readFileSync(`${Userpath}/local_settings.json`))["machine.General Settings.Paths.IDE.TempFolder"] || `${(Temporary.endsWith("/T") ? Temporary.slice(0, -2) : Temporary)}/GameMakerStudio2`) + "/GMS2TEMP/";
         }
         if (Electron_FS.existsSync(Temporary) == false) Electron_FS.mkdirSync(Temporary);
